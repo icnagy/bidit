@@ -2,7 +2,11 @@ class BidsController < ApplicationController
   # GET /bids
   # GET /bids.json
   def index
-    @bids = Bid.all
+    if session[:is_admin]
+      @bids = Bid.all
+    else
+      @bids = Bid.where(:user_id => session[:user_id])
+    end
 
     respond_to do |format|
       format.html # index.html.erb

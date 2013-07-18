@@ -1,0 +1,28 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+not_started_auction:
+  item: a_laptop
+  status: Closed
+  starttime: 2013-07-18 14:56:16
+  endtime: 2013-07-18 14:56:16
+  starting_bid: 1.00
+  bid_step: 1.00
+  lastbid_id: null
+
+started_auction:
+  item: a_phone
+  status: Ongoing
+  starttime: 2013-07-18 14:56:16
+  endtime: 2013-07-18 14:56:16
+  starting_bid: 9.99
+  bid_step: 9.99
+  lastbid_id: 1
+
+closed_auction:
+  item: a_desktop
+  status: Closed
+  starttime: 2013-07-18 14:56:16
+  endtime: 2013-07-18 14:56:16
+  starting_bid: 9.99
+  bid_step: 9.99
+  lastbid_id: 1

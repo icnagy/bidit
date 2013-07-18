@@ -1,4 +1,13 @@
 Auction::Application.routes.draw do
+  resources :items
+
+
+  resources :item_auctions
+
+
+  resources :item_categories
+
+
   resources :users
 
 

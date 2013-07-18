@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+a_laptop:
+  item_category: laptop
+  name: Dell XPS II
+  manufactured: 2013-07-18
+  description: Used
+
+a_phone:
+  item_category: phone
+  name: iPhone 3g
+  manufactured: 2013-07-18
+  description: Brand new
+
+a_desktop:
+  item_category: desktop
+  name: Dell PC
+  manufactured: 2010-07-18
+  description: Thousand years old

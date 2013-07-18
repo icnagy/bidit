@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @item_category.name %>
+</p>
+
+<%= render :partial => "items/items_list", :locals => {:items_list => @item_category.items} %>
+
+<%= link_to 'Edit', edit_item_category_path(@item_category) %> |
+<%= link_to 'Back', item_categories_path %>

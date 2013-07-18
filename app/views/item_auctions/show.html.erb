@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @item_auction.item_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @item_auction.status %>
+</p>
+
+<p>
+  <b>Starttime:</b>
+  <%= @item_auction.starttime %>
+</p>
+
+<p>
+  <b>Endtime:</b>
+  <%= @item_auction.endtime %>
+</p>
+
+<p>
+  <b>Starting bid:</b>
+  <%= @item_auction.starting_bid %>
+</p>
+
+<p>
+  <b>Bid step:</b>
+  <%= @item_auction.bid_step %>
+</p>
+
+<p>
+  <b>Lastbid:</b>
+  <%= @item_auction.lastbid_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_auction_path(@item_auction) %> |
+<%= link_to 'Back', item_auctions_path %>

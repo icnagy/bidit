@@ -12,6 +12,7 @@ BidIT auction system for ITSH
 * Business items:
 ** Schedule, Close, Reopen auction
 ** Auto add 5minutes to auction end time on new bid after T-5 minutes
-** Notification per email on wathced auctions
-** WebSocket notifications
+** Notification per email on wathced auctions ==> observers/after_create
+** WebSocket notifications observers/after_* before_*
+** items state=>[new, like new, used, broken, dead]
 ** etc

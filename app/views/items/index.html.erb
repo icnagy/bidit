@@ -1,0 +1,7 @@
+<h2>Listing items</h2>
+
+<%= render :partial => 'items_list', :locals => {:items_list => @items} %>
+
+<br/>
+
+<%= link_to 'New Item', new_item_path %>

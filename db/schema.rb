@@ -11,13 +11,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718122644) do
+ActiveRecord::Schema.define(:version => 20130718140818) do
 
   create_table "bids", :force => true do |t|
-    t.integer "item_id"
+    t.integer "item_auction_id"
     t.integer "user_id"
     t.decimal "bid"
     t.datetime "bidtime"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "item_auctions", :force => true do |t|
+    t.integer "item_id"
+    t.string "status"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.decimal "starting_bid"
+    t.decimal "bid_step"
+    t.integer "lastbid_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "item_categories", :force => true do |t|
+    t.string "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "items", :force => true do |t|
+    t.integer "item_category_id"
+    t.integer "item_auction_id"
+    t.string "name", :null => false
+    t.date "manufactured"
+    t.text "description"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -26,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130718122644) do
     t.string "name"
     t.string "email"
     t.string "password"
+    t.boolean "is_admin"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

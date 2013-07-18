@@ -1,0 +1,35 @@
+<h2>Listing item_auctions</h2>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Status</th>
+    <th>Starttime</th>
+    <th>Endtime</th>
+    <th>Starting bid</th>
+    <th>Bid step</th>
+    <th>Lastbid</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @item_auctions.each do |item_auction| %>
+      <tr>
+        <td><%= item_auction.item_id %></td>
+        <td><%= item_auction.status %></td>
+        <td><%= item_auction.starttime %></td>
+        <td><%= item_auction.endtime %></td>
+        <td><%= item_auction.starting_bid %></td>
+        <td><%= item_auction.bid_step %></td>
+        <td><%= item_auction.lastbid_id %></td>
+        <td><%= link_to 'Show', item_auction %></td>
+        <td><%= link_to 'Edit', edit_item_auction_path(item_auction) %></td>
+        <td><%= link_to 'Destroy', item_auction, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New Item auction', new_item_auction_path %>
