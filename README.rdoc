@@ -1,0 +1,17 @@
+== Welcome to BidIT
+
+BidIT auction system for ITSH
+
+== Getting Started
+
+== Todo
+
+* Create db schema
+* Create authorization for resources
+* Image upload and view
+* Business items:
+** Schedule, Close, Reopen auction
+** Auto add 5minutes to auction end time on new bid after T-5 minutes
+** Notification per email on wathced auctions
+** WebSocket notifications
+** etc

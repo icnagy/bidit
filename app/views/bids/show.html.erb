@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @bid.id %>
+</p>
+
+<p>
+  <b>Item:</b>
+  <%= @bid.item_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @bid.user_id %>
+</p>
+
+<p>
+  <b>Bid:</b>
+  <%= @bid.bid %>
+</p>
+
+<p>
+  <b>Bidtime:</b>
+  <%= @bid.bidtime %>
+</p>
+
+
+<%= link_to 'Edit', edit_bid_path(@bid) %> |
+<%= link_to 'Back', bids_path %>
