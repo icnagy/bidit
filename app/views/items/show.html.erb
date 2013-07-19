@@ -28,10 +28,10 @@
     </td>
     <td>
       <div id="picture" style="float:right">
-        <%= image_tag("/uploads/#{@item.id}.png", :size => "300x300") %>
+        <%= image_tag(@item.picture, :size => "300x300") %>
       </div>
     </td>
-    <% if @item.item_auction.status == "Ongoing" %>
+    <% if @item.item_auction && @item.item_auction.status == "Ongoing" %>
         <td>
           <div id="<%= @item.item_auction.id %>" style="width:50%">
 

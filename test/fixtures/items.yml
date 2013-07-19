@@ -4,16 +4,43 @@ a_laptop:
   item_category: laptop
   name: Dell XPS II
   manufactured: 2013-07-18
+  item_auction: not_started_auction
+  picture: "/assets/notebook_250.jpg"
   description: Used
 
 a_phone:
   item_category: phone
   name: iPhone 3g
   manufactured: 2013-07-18
+  item_auction: started_auction
+  picture: "/assets/phone_250.jpg"
   description: Brand new
 
 a_desktop:
   item_category: desktop
   name: Dell PC
   manufactured: 2010-07-18
+  item_auction: closed_auction
+  picture: "/assets/desktop_250.jpg"
   description: Thousand years old
+
+an_item_without_auction:
+  item_category: desktop
+  name: IBM PC
+  manufactured: 2011-07-18
+  picture: "/assets/desktop_250.jpg"
+  description: Good but old
+
+a_mabook:
+  item_category: laptop
+  name: Mabook Air
+  manufactured: 2011-07-19
+  picture: "/assets/notebook_250.jpg"
+  description: Never been better!:)
+
+galaxy_phone:
+  item_category: phone
+  name: Galaxy SIV
+  manufactured: 2013-06-18
+  picture: "/assets/phone_250.jpg"
+  description: Brand new

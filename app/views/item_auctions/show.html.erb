@@ -1,11 +1,48 @@
+<script type="text/javascript">
+    function countdown(dt, id, msg, enable_id, enable_message) {
+        var end = new Date(dt)
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+        var _msg = msg;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end.getTime() - now.getTime();
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById(id).innerHTML = _msg;
+                document.getElementById(enable_id).innerHTML = enabel_message;
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+            document.getElementById(id).innerHTML = days + "days ";
+            document.getElementById(id).innerHTML += hours + "hrs ";
+            document.getElementById(id).innerHTML += minutes + "mins ";
+            document.getElementById(id).innerHTML += seconds + "secs";
+
+        }
+
+        timer = setInterval(showRemaining, 1000);
+    }
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <h2>
   <b>Auction#:</b>
   <%= @item_auction.id %>
 </h2>
+
 <div id="picutre" style="float:right">
-  <%= image_tag("/uploads/#{@item_auction.item.id}.png", :size => "300x300") %>
+  <%= image_tag(@item_auction.item.picture, :size => "300x300") %>
 </div>
 
 <div id="<%= @item_auction.item.id %>" style="width:30%">
@@ -33,23 +70,30 @@
       <td>Description:</td>
       <td><%= @item_auction.item.description %></td>
     </tr>
-  </table>
-</div>
+    <tr>
+      <th>Auction</th>
+      <th></th>
+    </tr>
 
-<div style="width: 30%">
-
-  <table class="potential">
     <tr>
       <td>Status:</td>
       <td><%= @item_auction.status %></td>
     </tr>
     <tr>
       <td>Starttime:</td>
-      <td><%= @item_auction.starttime %></td>
+      <td><%= @item_auction.starttime.to_js %>
+        <div id="starttime">
+
+        </div>
+      </td>
     </tr>
     <tr>
       <td>Endtime:</td>
-      <td><%= @item_auction.endtime %></td>
+      <td><%= @item_auction.endtime.to_js %>
+        <div id="endtime">
+
+        </div>
+      </td>
       </br>
     </tr>
     <tr>
@@ -68,12 +112,19 @@
     </tr>
   </table>
 </div>
-<% if @item_auction.status != "Closed" %>
-    <div id="link_to_place_bid" style="width: 30%">
+<% if @item_auction.starttime > Time.now %>
+    <script>countdown(<%= @item_auction.starttime.to_i * 1000 %>, 'starttime', "Started!", 'link_to_place_bid', "<%= escape_javascript link_to("Place bid", place_bid_item_auction_path(:id => @item_auction.id, :current_bid => @item_auction.last_bid_amount), {:method => :post, :remote => true}) %>");</script>
+<% end %>
+<% if @item_auction.ongoing? && @item_auction.endtime > Time.now %>
+    <script>countdown(<%= @item_auction.endtime.to_i*1000 %>, 'endtime', "Ended!", "link_to_place_bid", "Auction closed!");</script>
+<% end %>
+
+<div id="link_to_place_bid" style="width: 30%">
+  <% if @item_auction.ongoing? %>
       <% if @item_auction.do_i_have_the_winning_bid?(session[:user_id]) %>
           You have the winning bid!
       <% else %>
-          <%= link_to("Place bid", place_bid_item_auction_path(:id => @item_auction.id, :current_bid => @item_auction.last_bid_amount), {:method => :post, :remote => true}, :class => "ui-button") %>
+          <%= link_to("Place bid", place_bid_item_auction_path(:id => @item_auction.id, :current_bid => @item_auction.last_bid_amount), {:method => :post, :remote => true}) %>
       <% end %>
-    </div>
-<% end %>
+  <% end %>
+</div>

@@ -7,23 +7,39 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<script>
+    timer = setInterval(query_news, 5000);
 
+    function query_news() {
+        console.log("INcoming");
+        $.ajax({
+            type: "GET",
+            url: '/item_auctions/news.js'
+        }).complete(function (msg) {
+                    document.getElementById('news').innerHTML = msg.responseText;
+                });
+    }
+
+</script>
 <div class="page">
   <header>
 
     <div id="title">
-      <img src="/assets/BidITlogo.png" height="70px" style="padding: 5px 0 0 10px ;"/>
+      <img src="/assets/bid4.png" height="70px" style="padding: 5px 0 0 10px ;"/>
+      <img src="/assets/rails.png" height="70px" style="padding: 5px 0 0 10px ;"/>
     </div>
-
+    <div id="title">
+      <div id="news"></div>
+    </div>
     <div id="pss-logo">
       <img src="/assets/pss_logo2.png" height="60px" style="padding-right: 10px; padding-top: 10px;"/>
     </div>
 
-    <div id="nav-title">
-      <ul id="nav-menu">
-        <li class="active">BidIT</li>
-      </ul>
-    </div>
+    <!--<div id="nav-title">-->
+    <!--<ul id="nav-menu">-->
+    <!--<li class="active">BidIT</li>-->
+    <!--</ul>-->
+    <!--</div>-->
 
     <% if session[:user_id] %>
         <div id="logindisplay">
@@ -57,16 +73,16 @@
       <%= yield %>
     </article>
 
-    <!--<ol class="round">-->
-    <!--<li></li>-->
+    <!--<ol id="news">-->
     <!--</ol>-->
 
 
   </section>
   <footer>
     <p>&copy; 2013 - IT-Services Hungary</p>
-    <a href="mailto:Csaba.Nagy02@t-systems.com">Contact support</a>
-    <%= p params %>
+    <a href="mailto:Csaba.Nagy02@t-systems.com">Contact support</a></br>
+
+    <%= p params %></br>
     <%= p session.inspect %>
 
   </footer>

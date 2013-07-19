@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <h2>
-  Name: <%= @item_category.name %>
+  Name: <%= @item_category.name %> (<%= link_to 'Edit', edit_item_category_path(@item_category) %>)
 </h2>
-
+<div style="float:right; display: inline">
+  <%= image_tag @item_category.picture %>
+</div>
+<h3>Related items</h3>
 <table>
   <tr>
     <th>Name</th>
@@ -28,5 +31,8 @@
   <% end %>
 </table>
 
-<%= link_to 'Edit', edit_item_category_path(@item_category) %> |
-<%= link_to 'Back', item_categories_path %>
+<% unless @auction_list.empty? %>
+    <h3>Related auctions</h3>
+
+    <%= render :partial => "/item_auctions/auction_list", :object => @auction_list %>
+<% end %>

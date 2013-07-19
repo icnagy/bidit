@@ -9,12 +9,17 @@ BidIT auction system for ITSH
 * Login/Logout/Register
 * Image upload and view
 
-== Todo
-
 * Business items:
 ** Schedule, Close, Reopen auction
 ** Auto add 5minutes to auction end time on new bid after T-5 minutes
-** Notification per email on wathced auctions ==> observers/after_create
-** WebSocket notifications observers/after_* before_*
+** on screen notifications for new auctions
 ** items state=>[new, like new, used, broken, dead]
+
+== Todo
+
+* Business items:
+** Auto start auction with js
+** Auto close auction with js
+** Notification per email on wathced auctions ==> observers/after_create
+** notifications observers/after_* before_*
 ** etc

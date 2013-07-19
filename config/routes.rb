@@ -11,6 +11,9 @@ Auction::Application.routes.draw do
       get 'close'
       get 'open'
     end
+    collection do
+      get 'news'
+    end
   end
 
   resources :item_categories

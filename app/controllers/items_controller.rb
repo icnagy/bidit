@@ -41,6 +41,15 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(params[:item])
+    #if params[:item][:picture]
+    #  uploaded_io = params[:item][:picture]
+    #  File.open(Rails.root.join('public', 'uploads/', "#{params[:id]}.png"), 'wb') do |file|
+    #    file.write(uploaded_io.read)
+    #  end
+    #  params[:item][:picture] = "/uploads/#{@item.id}.png"
+    #else
+    #  params[:item][:picture] = ItemCategory.find(params[:item][:item_category_id]).picture
+    #end
 
     respond_to do |format|
       if @item.save
@@ -57,12 +66,13 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
-    uploaded_io = params[:item][:picture]
-    #File.open(Rails.root.join('public', 'uploads/'+params[:id], uploaded_io.original_filename), 'w') do |file|
-    File.open(Rails.root.join('public', 'uploads/', "#{params[:id]}.png"), 'wb') do |file|
-      file.write(uploaded_io.read)
-    end
-    params[:items][:picture] = nil
+    #if params[:item][:picture]
+    #  uploaded_io = params[:item][:picture]
+    #  File.open(Rails.root.join('public', 'uploads/', "#{params[:id]}.png"), 'wb') do |file|
+    #    file.write(uploaded_io.read)
+    #  end
+    #  params[:item][:picture] = "/uploads/#{@item.id}.png"
+    #end
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }

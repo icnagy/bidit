@@ -15,6 +15,7 @@ class ItemCategoriesController < ApplicationController
   def show
     @item_category = ItemCategory.find(params[:id])
     @items_list = Item.where(:item_category_id => @item_category.id)
+    @auction_list = ItemAuction.where(:id => Item.where(:item_category_id => ItemCategory.last.id).pluck(:item_auction_id))
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item_category }
@@ -41,6 +42,14 @@ class ItemCategoriesController < ApplicationController
   # POST /item_categories.json
   def create
     @item_category = ItemCategory.new(params[:item_category])
+    if params[:item_category][:picture]
+      uploaded_io = params[:item_category][:picture]
+      #File.open(Rails.root.join('public', 'uploads/'+params[:id], uploaded_io.original_filename), 'w') do |file|
+      File.open(Rails.root.join('public', 'uploads/', "#{params[:id]}.png"), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      params[:item_category][:picture] = "/uploads/#{@item.id}.png"
+    end
 
     respond_to do |format|
       if @item_category.save
@@ -57,6 +66,15 @@ class ItemCategoriesController < ApplicationController
   # PUT /item_categories/1.json
   def update
     @item_category = ItemCategory.find(params[:id])
+
+    if params[:item_category][:picture]
+      uploaded_io = params[:item_category][:picture]
+      #File.open(Rails.root.join('public', 'uploads/'+params[:id], uploaded_io.original_filename), 'w') do |file|
+      File.open(Rails.root.join('public', 'uploads/', "#{params[:id]}.png"), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      params[:item_category][:picture] = "/uploads/#{@item.id}.png"
+    end
 
     respond_to do |format|
       if @item_category.update_attributes(params[:item_category])

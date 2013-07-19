@@ -1,17 +1,15 @@
-<h2>Listing item_categories</h2>
+<h2></h2>
 
 <table>
   <tr>
     <th>Name</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
   <% @item_categories.each do |item_category| %>
       <tr>
-        <td><%= item_category.name %></td>
-        <td><%= link_to 'Show', item_category %></td>
+        <td><%= link_to item_category.name, item_category %></td>
         <td><%= link_to 'Edit', edit_item_category_path(item_category) %></td>
         <td><%= link_to 'Delete', item_category, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
@@ -20,4 +18,4 @@
 
 <br/>
 
-<%= link_to 'New Item category', new_item_category_path %>
+<%= link_to 'Add Item category', new_item_category_path %>

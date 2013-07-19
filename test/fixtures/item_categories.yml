@@ -2,9 +2,12 @@
 
 laptop:
   name: Laptop
+  picture: "/uploads/notebook_250.jpg"
 
 phone:
   name: Phone
+  picture: "/uploads/phone_250.jpg"
 
 desktop:
   name: Desktop
+  picture: "/uploads/desktop_250.jpg"

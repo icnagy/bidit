@@ -1,29 +1,33 @@
-<h2>Listing bids</h2>
+<% if session[:is_admin] %>
+    <h2>Bids</h2>
+<% else %>
+    <h2>My Bids</h2>
+<% end %>
 
 <table>
   <tr>
     <th>#</th>
     <th>Item</th>
-    <th>User</th>
     <th>Bid</th>
     <th>Bidtime</th>
-    <th></th>
-    <th></th>
+    <% if session[:is_admin] %>
+        <th>User</th>
+        <th></th>
+        <th></th>
+    <% end %>
   </tr>
 
   <% @bids.each_with_index do |bid, y| %>
       <tr>
         <td><%= y+1 %></td>
         <td><%= bid.item.name %></td>
-        <td><%= bid.user.name %></td>
         <td><%= bid.bid %></td>
         <td><%= bid.created_at %></td>
-        <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
-        <td><%= link_to 'Delete', bid, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% if session[:is_admin] %>
+            <td><%= link_to bid.user.name, bid.user %></td>
+            <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
+            <td><%= link_to 'Delete', bid, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
       </tr>
   <% end %>
 </table>
-
-<br/>
-
-<%= link_to 'New Bid', new_bid_path %>

@@ -1,0 +1,38 @@
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Item</th>
+    <th>Status</th>
+    <th>Starttime</th>
+    <th>Endtime</th>
+    <th>Starting bid</th>
+    <th>Bid step</th>
+    <th>Current bid</th>
+    <% if session[:is_admin] %>
+        <th></th>
+        <th></th>
+        <th></th>
+    <% end %>
+  </tr>
+
+  <% auction_list.each do |item_auction| %>
+      <tr id="<%= item_auction.id %>">
+        <td><%= link_to(item_auction.id, item_auction) %></td>
+        <td><%= link_to(item_auction.item_name, item_auction.item) %></td>
+        <td id="auction_status"><%= item_auction.status %></td>
+        <td><%= item_auction.starttime %></td>
+        <td><%= item_auction.endtime %></td>
+        <td><%= item_auction.starting_bid %></td>
+        <td><%= item_auction.bid_step %></td>
+        <td id="last_bid_amount"><%= item_auction.last_bid_amount %></td>
+        <% if session[:is_admin] %>
+            <td><%= link_to 'Edit', edit_item_auction_path(item_auction) %></td>
+            <td>
+              <%= link_to 'Close', close_item_auction_path(item_auction), :remote => true %>
+              <%= link_to 'Open', open_item_auction_path(item_auction), :remote => true %>
+            </td>
+            <td><%= link_to 'Delete', item_auction, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            </tr>
+        <% end %>
+  <% end %>
+</table>

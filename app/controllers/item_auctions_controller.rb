@@ -30,8 +30,11 @@ class ItemAuctionsController < ApplicationController
     @item_auction = ItemAuction.new
 
     respond_to do |format|
+      #if Item.where('item_auction_id = ?', nil).exists?
       format.html # new.html.erb
       format.json { render json: @item_auction }
+      #else
+      #  format.html { redirect_to item_auctions_path, notice => "There are no items without auction"}
     end
   end
 
@@ -113,6 +116,18 @@ class ItemAuctionsController < ApplicationController
     respond_to do |format|
       if @item_auction.open
         format.js
+      else
+        format.js
+      end
+    end
+  end
+
+  def news
+    @item_auction = ItemAuction.where('created_at > ?', Time.now-5.minutes)
+    puts @item_auction.inspect
+    respond_to do |format|
+      if @item_auction.empty?
+        format.js { render js: "" }
       else
         format.js
       end

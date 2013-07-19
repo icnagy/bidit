@@ -14,7 +14,7 @@
     <div class="field">
       <%= f.label :item %>
       <br/>
-      <%= f.select :item_id, options_for_select(Item.where('item_auction_id = ?', nil).map { |item| [item.name, item.id] }) %>
+      <%= f.select :item_id, options_for_select(Item.where(:item_auction_id => nil).map { |item| [item.name, item.id] }) %>
     </div>
     <div class="field">
       <%= f.label :status %>
@@ -24,12 +24,12 @@
     <div class="field">
       <%= f.label :starttime %>
       <br/>
-      <%= f.datetime_select :starttime %>
+      <%= f.datetime_select :starttime, :default => 5.minutes.from_now %>
     </div>
     <div class="field">
       <%= f.label :endtime %>
       <br/>
-      <%= f.datetime_select :endtime %>
+      <%= f.datetime_select :endtime, :default => 10.minutes.from_now %>
     </div>
     <div class="field">
       <%= f.label :starting_bid %>

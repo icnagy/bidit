@@ -12,9 +12,9 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :category_id %>
+      <%= f.label :item_category_id %>
       <br/>
-      <%= f.select :item_category_id, options_for_select(ItemCategory.all.map { |category| [category.name, category.id] }) %>
+      <%= f.select :item_category_id, options_for_select(ItemCategory.all.map { |category| [category.name, category.id] }, :selected => @item.item_category_id) %>
     </div>
     <div class="field">
       <%= f.label :name %>
@@ -29,15 +29,15 @@
     <div class="field">
       <%= f.label :condition %>
       <br/>
-      <%= f.select :state, options_for_select(['mint/new', 'like new', 'used', 'broken', 'dead']) %>
+      <%= f.select :state, options_for_select(['mint/new', 'like new', 'used', 'broken', 'dead'], :selected => @item.state) %>
     </div>
     <div class="field">
       <%= f.label :description %>
       <br/>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, :rows => 5 %>
     </div>
     <div class="field">
-      <%= f.file_field :picture %>
+      <%= f.file_field :pic %>
     </div>
 
     <div class="actions">
