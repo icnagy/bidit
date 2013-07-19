@@ -1,11 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @item_category.name %>
-</p>
+<h2>
+  Name: <%= @item_category.name %>
+</h2>
 
-<%= render :partial => "items/items_list", :locals => {:items_list => @item_category.items} %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Manufactured</th>
+    <th>Description</th>
+    <% if session[:is_admin] %>
+        <th></th>
+        <th></th>
+    <% end %>
+  </tr>
+
+  <% @items_list.each do |item| %>
+      <tr>
+        <td><%= link_to(item.name, item) %></td>
+        <td><%= item.manufactured %></td>
+        <td><%= item.description %></td>
+        <% if session[:is_admin] %>
+            <td><%= link_to 'Edit', edit_item_path(item) %></td>
+            <td><%= link_to 'Delete', item, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
 
 <%= link_to 'Edit', edit_item_category_path(@item_category) %> |
 <%= link_to 'Back', item_categories_path %>

@@ -1,0 +1,7 @@
+$("#last_bid_amount").html("<%= escape_javascript(@item_auction.last_bid.bid.to_s) %>");
+<% if @item_auction.do_i_have_the_winning_bid?(session[:user_id]) %>
+$("#link_to_place_bid").html("You have the winning bid!")
+<% else %>
+$("#link_to_place_bid").html("<%= escape_javascript(link_to("Place bid", place_bid_item_auction_path(:id => @item_auction.id, :current_bid => @item_auction.last_bid_amount), {:method => :post, :remote => true})) %>");
+<% end %>
+console.log("OK");

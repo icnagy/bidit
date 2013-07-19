@@ -1,18 +1,21 @@
 Auction::Application.routes.draw do
+  get "login/login"
+
+  get "login/logout"
+
   resources :items
 
-
-  resources :item_auctions
-
+  resources :item_auctions do
+    member do
+      post 'place_bid'
+      get 'close'
+      get 'open'
+    end
+  end
 
   resources :item_categories
-
-
   resources :users
-
-
   resources :bids
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -63,7 +66,7 @@ Auction::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'login#login'
 
   # See how all your routes lay out with "rake routes"
 

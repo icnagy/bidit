@@ -2,26 +2,24 @@
 
 <table>
   <tr>
-    <th>Id</th>
+    <th>#</th>
     <th>Item</th>
     <th>User</th>
     <th>Bid</th>
     <th>Bidtime</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
-  <% @bids.each do |bid| %>
+  <% @bids.each_with_index do |bid, y| %>
       <tr>
-        <td><%= bid.id %></td>
-        <td><%= bid.item_id %></td>
-        <td><%= bid.user_id %></td>
+        <td><%= y+1 %></td>
+        <td><%= bid.item.name %></td>
+        <td><%= bid.user.name %></td>
         <td><%= bid.bid %></td>
-        <td><%= bid.bidtime %></td>
-        <td><%= link_to 'Show', bid %></td>
+        <td><%= bid.created_at %></td>
         <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
-        <td><%= link_to 'Destroy', bid, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td><%= link_to 'Delete', bid, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
   <% end %>
 </table>

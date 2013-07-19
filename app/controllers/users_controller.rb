@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :is_admin?, :only => [:index]
   # GET /users
   # GET /users.json
   def index
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
   # POST /users
@@ -44,6 +45,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        session[:user_id] = @user.id
+        session[:is_admin] = @user.is_admin
+        session[:username] = @user.name
+
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else

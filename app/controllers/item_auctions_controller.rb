@@ -1,7 +1,10 @@
 class ItemAuctionsController < ApplicationController
+  before_filter :is_admin?, :except => [:index, :show]
+
   # GET /item_auctions
   # GET /item_auctions.json
   def index
+    @my_item_auctions = ItemAuction.joins(:bids).where('bids.user_id = ?', session[:user_id]).uniq.order('endtime ASC')
     @item_auctions = ItemAuction.all
 
     respond_to do |format|
@@ -78,6 +81,41 @@ class ItemAuctionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to item_auctions_url }
       format.json { head :no_content }
+    end
+  end
+
+  def place_bid
+    @item_auction = ItemAuction.find(params[:id])
+    respond_to do |format|
+      if @item_auction.place_bid(params, session[:user_id])
+        format.html { redirect_to @item_auction, notice: 'Item auction was successfully updated.' }
+        format.js
+      else
+        format.html { redirect_to @item_auction, notice: 'Cannot place bid!' }
+        format.js { render js: 'console.log("Error!!!");$("#link_to_place_bid").html("Error not a valid bid!");' }
+      end
+    end
+  end
+
+  def close
+    @item_auction = ItemAuction.find(params[:id])
+    respond_to do |format|
+      if @item_auction.close
+        format.js
+      else
+        format.js
+      end
+    end
+  end
+
+  def open
+    @item_auction = ItemAuction.find(params[:id])
+    respond_to do |format|
+      if @item_auction.open
+        format.js
+      else
+        format.js
+      end
     end
   end
 end

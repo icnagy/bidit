@@ -12,9 +12,7 @@
   <header>
 
     <div id="title">
-      <a href="/en/TargetAgreement" style="color:#fff;">
-        <img src="EPS_with_text_688x140.jpg" height="70px" style="padding: 5px 0 0 10px ;"/>
-      </a>
+      <img src="/assets/BidITlogo.png" height="70px" style="padding: 5px 0 0 10px ;"/>
     </div>
 
     <div id="pss-logo">
@@ -27,53 +25,37 @@
       </ul>
     </div>
 
-
-    <div id="logindisplay">
-      <div id="displayname"><strong><%= current_username %></strong></div>
-      <div id="rolenames"><%= current_userrole %></div>
-    </div>
-
+    <% if session[:user_id] %>
+        <div id="logindisplay">
+          <div id="displayname"><strong><%= current_username %></strong></div>
+          <div id="rolenames"></div>
+          <%= link_to("Logout", login_logout_path) %>
+        </div>
+    <% else %>
+        <div id="logindisplay">
+          <div id="rolenames"><%= link_to("Register", new_user_path) %></div>
+        </div>
+    <% end %>
   </header>
-  <nav>
-    <ul id="menu">
-      <li class="active"><%= link_to "Items", items_path %></li>
-      <li class="active"><%= link_to "Categories", item_categories_path %></li>
-      <li class="active"><%= link_to "Auctions", item_auctions_path %></li>
-      <li class="active"><%= link_to "Bids", bids_path %></li>
-      <% if is_admin? %>
-          <li class="active"><%= link_to "Users", users_path %></li>
-      <% end %>
-    </ul>
-  </nav>
+
+  <% if session[:user_id] %>
+      <nav>
+        <ul id="menu">
+          <%= content_tag(:li, link_to("Items", items_path), :class => controller.controller_name =="items" ? "active" : "") %>
+          <%= content_tag(:li, link_to("Auctions", item_auctions_path), :class => controller.controller_name =="item_auctions" ? "active" : "") %>
+          <%= content_tag(:li, link_to("Bids", bids_path), :class => controller.controller_name =="bids" ? "active" : "") %>
+          <% if is_admin? %>
+              <%= content_tag(:li, link_to("Categories", item_categories_path), :class => controller.controller_name =="item_categories" ? "active" : "") %>
+              <%= content_tag(:li, link_to("Users", users_path), :class => controller.controller_name =="users" ? "active" : "") %>
+          <% end %>
+        </ul>
+      </nav>
+  <% end %>
   <section id="main">
 
     <article>
       <%= yield %>
     </article>
-
-    <!--<h2>Home Page</h2>-->
-
-    <!--<h3>Welcome to the EPS - Employee Performance System Portal&#39;s Target Agreement Module.</h3>-->
-
-    <!--<p>Please read the Users&#39; Guide first, and if you are HR Business Partner, Compensation and Benefit specialist,-->
-    <!--Superuser, Admin, Head of Department or CEO user, please read the Privileged Users&#39; Guide as well.</p>-->
-    <!--<a href="/Content/Documents/ITSH_EPS - Target Agreement Module_Users&#39;_Guide_EN.pdf">-->
-    <!--Users' Guide</a>-->
-
-    <!--<p>-->
-    <!--<a href="/Content/Documents/ITSH_EPS - Target Agreement Module_Users&#39;_Guide_HU.pdf">-->
-    <!--Felhaszn�l�i K�zik�nyv</a>-->
-    <!--</p>-->
-
-    <!--<p>-->
-    <!--<a href="/Content/Documents/ITSH_EPS - Target Agreement Module_Privileged_Users&#39;_Guide_EN.pdf">-->
-    <!--Users' Guide for Privileged Users</a>-->
-    <!--</p>-->
-
-    <!--<p>-->
-    <!--<a href="/Content/Documents/ITSH_EPS - Target Agreement Module_Privileged_Users&#39;_Guide_HU.pdf">-->
-    <!--Felhaszn�l�i K�zik�nyv - Kiemelt Felhaszn�l�k sz�m�ra</a>-->
-    <!--</p>-->
 
     <!--<ol class="round">-->
     <!--<li></li>-->
@@ -84,6 +66,9 @@
   <footer>
     <p>&copy; 2013 - IT-Services Hungary</p>
     <a href="mailto:Csaba.Nagy02@t-systems.com">Contact support</a>
+    <%= p params %>
+    <%= p session.inspect %>
+
   </footer>
 </div>
 

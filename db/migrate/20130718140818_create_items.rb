@@ -6,6 +6,8 @@ class CreateItems < ActiveRecord::Migration
       t.integer :item_auction_id
       t.string :name, :null => false
       t.date :manufactured
+      t.string :state
+      t.string :picture
       t.text :description
 
       t.timestamps

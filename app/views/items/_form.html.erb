@@ -14,7 +14,7 @@
     <div class="field">
       <%= f.label :category_id %>
       <br/>
-      <%= f.number_field :category_id %>
+      <%= f.select :item_category_id, options_for_select(ItemCategory.all.map { |category| [category.name, category.id] }) %>
     </div>
     <div class="field">
       <%= f.label :name %>
@@ -27,10 +27,19 @@
       <%= f.date_select :manufactured %>
     </div>
     <div class="field">
+      <%= f.label :condition %>
+      <br/>
+      <%= f.select :state, options_for_select(['mint/new', 'like new', 'used', 'broken', 'dead']) %>
+    </div>
+    <div class="field">
       <%= f.label :description %>
       <br/>
       <%= f.text_area :description %>
     </div>
+    <div class="field">
+      <%= f.file_field :picture %>
+    </div>
+
     <div class="actions">
       <%= f.submit %>
     </div>

@@ -1,25 +1,54 @@
+<h2></h2>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Category:</b>
-  <%= @item.category_id %>
-</p>
+<table style="width: 50%">
+  <tr>
+    <td>
+      <table class="potential">
+        <tr>
+          <td>Item:</td>
+          <td><%= @item.name %></td>
+        </tr>
 
-<p>
-  <b>Name:</b>
-  <%= @item.name %>
-</p>
+        <tr>
+          <td>Category:</td>
+          <td><%= @item.item_category.name %></td>
+        </tr>
 
-<p>
-  <b>Manufactured:</b>
-  <%= @item.manufactured %>
-</p>
+        <tr>
+          <td>Manufactured:</td>
+          <td><%= @item.manufactured %></td>
+        </tr>
 
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
+        <tr>
+          <td>Description:</td>
+          <td><%= @item.description %></td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <div id="picture" style="float:right">
+        <%= image_tag("/uploads/#{@item.id}.png", :size => "300x300") %>
+      </div>
+    </td>
+    <% if @item.item_auction.status == "Ongoing" %>
+        <td>
+          <div id="<%= @item.item_auction.id %>" style="width:50%">
 
+            <table>
+              <tr>
+                <th>Auction</th>
+                <th>Current bid</th>
+              </tr>
+              <tr>
+                <td><%= link_to @item.item_auction.id, @item.item_auction %></td>
+                <td><%= @item.item_auction.last_bid_amount %></td>
+              </tr>
+            </table>
+          </div>
+        </td>
+    <% end %>
+  </tr>
+</table>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

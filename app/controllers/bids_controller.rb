@@ -1,4 +1,6 @@
 class BidsController < ApplicationController
+  before_filter :is_admin?, :except => [:index, :new, :create]
+
   # GET /bids
   # GET /bids.json
   def index

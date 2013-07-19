@@ -5,8 +5,26 @@ normal_user:
   password: secret1
   is_admin: false
 
+mellow_user:
+  name: Mellow User
+  email: icnagy1@gmail.com
+  password: secret2
+  is_admin: false
+
+happy_user:
+  name: Happy User
+  email: icnagy2@gmail.com
+  password: secret3
+  is_admin: false
+
+angry_user:
+  name: Angry User
+  email: icnagy3@gmail.com
+  password: secret4
+  is_admin: false
+
 admin_user:
   name: Admin Istrator
-  email: icnagy@gmail.com
-  password: secret2
+  email: admin
+  password: admin
   is_admin: true

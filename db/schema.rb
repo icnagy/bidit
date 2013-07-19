@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20130718140818) do
     t.integer "item_auction_id"
     t.string "name", :null => false
     t.date "manufactured"
+    t.string "state"
+    t.string "picture"
     t.text "description"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

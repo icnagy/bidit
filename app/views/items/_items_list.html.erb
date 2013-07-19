@@ -4,20 +4,22 @@
     <th>Name</th>
     <th>Manufactured</th>
     <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if session[:is_admin] %>
+        <th></th>
+        <th></th>
+    <% end %>
   </tr>
 
   <% items_list.each do |item| %>
       <tr>
-        <td><%= link_to("#{item.item_category.name}", item.item_category) %></td>
-        <td><%= item.name %></td>
+        <td><%= link_to(item.item_category.name, item.item_category) %></td>
+        <td><%= link_to(item.name, item) %></td>
         <td><%= item.manufactured %></td>
         <td><%= item.description %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% if session[:is_admin] %>
+            <td><%= link_to 'Edit', edit_item_path(item) %></td>
+            <td><%= link_to 'Delete', item, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
       </tr>
   <% end %>
 </table>

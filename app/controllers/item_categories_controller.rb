@@ -14,7 +14,7 @@ class ItemCategoriesController < ApplicationController
   # GET /item_categories/1.json
   def show
     @item_category = ItemCategory.find(params[:id])
-
+    @items_list = Item.where(:item_category_id => @item_category.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item_category }

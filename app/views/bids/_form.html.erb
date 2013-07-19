@@ -12,19 +12,13 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :id %>
-      <br/>
-      <%= f.number_field :id %>
+      <%= f.label :id %>: <%= f.label @bid.id %>
     </div>
     <div class="field">
-      <%= f.label :item_id %>
-      <br/>
-      <%= f.number_field :item_id %>
+      <%= f.label :item %>: <%= f.select :item, options_for_select(Item.all.map { |item| [item.name, item.id] }) %>
     </div>
     <div class="field">
-      <%= f.label :user_id %>
-      <br/>
-      <%= f.number_field :user_id %>
+      <%= f.label :user %>: <%= f.select :user, options_for_select(User.all.map { |user| [user.name, user.id] }) %>
     </div>
     <div class="field">
       <%= f.label :bid %>

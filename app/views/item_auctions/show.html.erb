@@ -1,40 +1,79 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Item:</b>
-  <%= @item_auction.item_id %>
-</p>
+<h2>
+  <b>Auction#:</b>
+  <%= @item_auction.id %>
+</h2>
+<div id="picutre" style="float:right">
+  <%= image_tag("/uploads/#{@item_auction.item.id}.png", :size => "300x300") %>
+</div>
 
-<p>
-  <b>Status:</b>
-  <%= @item_auction.status %>
-</p>
+<div id="<%= @item_auction.item.id %>" style="width:30%">
+  <table class="potential">
+    <tr>
+      <th>Item:</th>
+      <th><%= @item_auction.item.name %></th>
+    </tr>
+    <tr>
+      <td>Category:</td>
+      <td><%= @item_auction.item.item_category.name %></td>
+    </tr>
 
-<p>
-  <b>Starttime:</b>
-  <%= @item_auction.starttime %>
-</p>
+    <tr>
+      <td>Name:</td>
+      <td><%= @item_auction.item.name %></td>
+    </tr>
 
-<p>
-  <b>Endtime:</b>
-  <%= @item_auction.endtime %>
-</p>
+    <tr>
+      <td>Manufactured:</td>
+      <td><%= @item_auction.item.manufactured %></td>
+    </tr>
 
-<p>
-  <b>Starting bid:</b>
-  <%= @item_auction.starting_bid %>
-</p>
+    <tr>
+      <td>Description:</td>
+      <td><%= @item_auction.item.description %></td>
+    </tr>
+  </table>
+</div>
 
-<p>
-  <b>Bid step:</b>
-  <%= @item_auction.bid_step %>
-</p>
+<div style="width: 30%">
 
-<p>
-  <b>Lastbid:</b>
-  <%= @item_auction.lastbid_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_item_auction_path(@item_auction) %> |
-<%= link_to 'Back', item_auctions_path %>
+  <table class="potential">
+    <tr>
+      <td>Status:</td>
+      <td><%= @item_auction.status %></td>
+    </tr>
+    <tr>
+      <td>Starttime:</td>
+      <td><%= @item_auction.starttime %></td>
+    </tr>
+    <tr>
+      <td>Endtime:</td>
+      <td><%= @item_auction.endtime %></td>
+      </br>
+    </tr>
+    <tr>
+      <td>Starting bid:</td>
+      <td><%= @item_auction.starting_bid %></td>
+    </tr>
+    <tr>
+      <td>Bid step:</td>
+      <td><%= @item_auction.bid_step %></td>
+    </tr>
+    <tr>
+      <td>Lastbid:</td>
+      <td id="last_bid_amount">
+        <%= @item_auction.last_bid_amount %>
+      </td>
+    </tr>
+  </table>
+</div>
+<% if @item_auction.status != "Closed" %>
+    <div id="link_to_place_bid" style="width: 30%">
+      <% if @item_auction.do_i_have_the_winning_bid?(session[:user_id]) %>
+          You have the winning bid!
+      <% else %>
+          <%= link_to("Place bid", place_bid_item_auction_path(:id => @item_auction.id, :current_bid => @item_auction.last_bid_amount), {:method => :post, :remote => true}, :class => "ui-button") %>
+      <% end %>
+    </div>
+<% end %>

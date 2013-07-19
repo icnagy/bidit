@@ -8,12 +8,12 @@ one:
 
 two:
   item_auction: started_auction
-  user: normal_user
+  user: happy_user
   bid: 9.99
   bidtime: 2013-07-18 14:24:55
 
 three:
   item_auction: closed_auction
-  user: normal_user
+  user: mellow_user
   bid: 9.99
   bidtime: 2013-07-18 14:24:55

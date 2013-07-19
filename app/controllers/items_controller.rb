@@ -57,7 +57,12 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
-
+    uploaded_io = params[:item][:picture]
+    #File.open(Rails.root.join('public', 'uploads/'+params[:id], uploaded_io.original_filename), 'w') do |file|
+    File.open(Rails.root.join('public', 'uploads/', "#{params[:id]}.png"), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    params[:items][:picture] = nil
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
