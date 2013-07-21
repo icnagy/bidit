@@ -2,7 +2,20 @@
 
 BidIT auction system for ITSH
 
+Created during 24h ITSH PSS Coding Competition on 18-19. 07. 2013.
+
 == Getting Started
+
+This is a simple web based auction system to sell the companys old assets by the asset management team.
+Every item should have a name, a description, a category, a picture and a manufactured date. Every item can have one auction.
+A category, has a name, and a default picture.
+An auction has an item, a begining/endig time, a minimum bid, a bid step. Users can place bids after
+the begining time, till ending time.
+Users can be either AM stuff (admin) or regular users.
+
+Written under 24h. Done in Rails 3.2.13 / w. JQuery.
+
+Should have used websockets and stuff, but had no internet connection.
 
 == Done
 * Create db schema
